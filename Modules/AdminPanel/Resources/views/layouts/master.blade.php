@@ -48,8 +48,6 @@
         <div class="row">
           <div class="col-lg-12 p-r-0 title-margin-right">
             @yield('content')
-            Ths is from here
-
             {{-- Laravel Vite - JS File --}}
             {{-- {{ module_vite('build-adminpanel', 'Resources/assets/js/app.js') }} --}}
           </div>
