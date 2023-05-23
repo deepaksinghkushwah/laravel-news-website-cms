@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('adminpanel')->group(function() {
+Route::group([
+    'prefix' => 'adminpanel',
+    'middleware' => ['auth','can:isAdmin']
+],function() {
     Route::get('/', 'AdminPanelController@index');
 });
