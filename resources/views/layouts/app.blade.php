@@ -60,6 +60,11 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    @can("isAdmin")
+                                    <a class="dropdown-item" href="{{ url('/adminpanel') }}">
+                                        Admin Panel
+                                    </a>
+                                    @endcan
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
