@@ -20,6 +20,21 @@
 
         <li>
           <a class="sidebar-sub-toggle">
+            <i class="ti-target"></i> Categories
+            <span class="sidebar-collapse-icon ti-angle-down"></span>
+          </a>
+          <ul>
+            <li>
+              <a href="{{ route('admin.page-category.create') }}">Create New</a>
+            </li>
+            <li>
+              <a href="{{ route('admin.page-category.index') }}">List All</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a class="sidebar-sub-toggle">
             <i class="ti-target"></i> Pages
             <span class="sidebar-collapse-icon ti-angle-down"></span>
           </a>
