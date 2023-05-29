@@ -17,15 +17,17 @@
         <table class="table table-bordered">
             <tr>
                 <th width="10%">ID</th>
-                <th width="60%">Title</th>
+                <th width="40%">Title</th>
+                <th width="20%">Parent</th>
                 <th width="10%">Status</th>
                 <th width="20%">Action</th>
             </tr>
 
             @foreach ($categories as $row)
-            <tr>
+            <tr class="{{ $row->deleted_at != '' ? 'bg-warning' : '' }}">
                 <th scope="row">{{ $row->id }}</th>
                 <th>{{ $row->title }}</th>
+                <th>{{ $row->parent_id == 0 ? 'Root' : $row->parent->title }}</th>
                 <th>{{ $row->status == 1 ? 'Active' : 'Inactive' }}</th>
                 <th>
                     <a href="{{ route('admin.page-category.edit',$row->id) }}" class="btn btn-sm btn-primary">Edit</a>

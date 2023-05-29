@@ -40,10 +40,10 @@
           </a>
           <ul>
             <li>
-              <a href="#">Create New</a>
+              <a href="{{ url('/adminpanel/pages/create') }}">Create New</a>
             </li>
             <li>
-              <a href="#">List All</a>
+              <a href="{{ url('/adminpanel/pages') }}">List All</a>
             </li>
           </ul>
         </li>

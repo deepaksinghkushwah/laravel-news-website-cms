@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Page;
 use App\Models\PageCategories;
 use Illuminate\Database\Seeder;
 
@@ -29,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory(10)->create();*/
 
-        PageCategories::factory()->create([
+        /*PageCategories::factory()->create([
             'title' => 'System',
             'status' => 1,
             'parent_id' => 0
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'Blogs',
             'status' => 1,
             'parent_id' => 0
-        ]);
+        ]);*/
+        Page::factory(10)->create();
     }
 }

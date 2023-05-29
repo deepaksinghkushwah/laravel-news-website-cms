@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use Modules\AdminPanel\Http\Controllers\PageCategoryController;
+use Modules\AdminPanel\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +33,9 @@ Route::group([
 
     // delete
     Route::get('/page-categories/delete/{category}',[PageCategoryController::class, 'destroy'])->name('admin.page-category.delete');
+
+
+    // page controller
+    Route::resource("/pages", PageController::class);
 
 });

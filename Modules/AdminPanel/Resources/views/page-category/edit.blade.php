@@ -10,7 +10,18 @@
         <form action="{{ route('admin.page-category.edit', $category->id) }}" method="post">
             @csrf
             @method("patch")
+            @include("adminpanel::layouts.form-errors")
             <table class="table">
+                <tr>
+                    <th>
+                        <select class="form-control" name="parent_id">
+                            <option {{ $category->parent_id == 0 ? 'selected="selected"' : ''}}  value="0">Root Category</option>
+                            @foreach ($categories as $cat)
+                            <option {{ $cat->id == $category->parent_id ? 'selected="selected"' : ''}} value="{{ $cat->id }}">{{ $cat->title }}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                </tr>
                 <tr>
                     <th><input class="form-control" type="text" name="title" value="{{ $category->title }}"></th>
                 </tr>

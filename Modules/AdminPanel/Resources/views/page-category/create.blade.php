@@ -11,6 +11,16 @@
             @csrf
             <table class="table">
                 <tr>
+                    <th>
+                        <select class="form-control" name="parent_id">
+                            <option value="0">Root Category</option>
+                            @foreach ($categories as $cat)
+                            <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                </tr>
+                <tr>
                     <th><input class="form-control" type="text" name="title"></th>
                 </tr>
                 <tr>

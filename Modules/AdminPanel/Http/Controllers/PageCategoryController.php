@@ -15,7 +15,7 @@ class PageCategoryController extends Controller
      */
     public function index()
     {
-        $categories = PageCategories::all();
+        $categories = PageCategories::withTrashed()->get();
         return view('adminpanel::page-category.index',['categories' => $categories]);
     }
 
@@ -25,7 +25,8 @@ class PageCategoryController extends Controller
      */
     public function create()
     {
-        return view('adminpanel::page-category.create');
+        $categories = PageCategories::where("parent_id","=","0")->get();
+        return view('adminpanel::page-category.create',['categories' => $categories]);
     }
 
     /**
@@ -38,9 +39,11 @@ class PageCategoryController extends Controller
         $validate = $request->validate([
             'title' => 'required',
             'status' => 'required',
+            'parent_id' => 'required',
         ]);
         PageCategories::create([
             "title" => $validate['title'],
+            "parent_id" => $validate['parent_id'],
             "status" => $validate['status']
         ]);
         return redirect()->route('admin.page-category.index')->with('success','Category created');
@@ -63,7 +66,8 @@ class PageCategoryController extends Controller
      */
     public function edit(PageCategories $category)
     {
-        return view('adminpanel::page-category.edit',['category' => $category]);
+        $categories = PageCategories::where("parent_id","=","0")->get();
+        return view('adminpanel::page-category.edit',['category' => $category,'categories' => $categories]);
     }
 
     /**
@@ -77,10 +81,12 @@ class PageCategoryController extends Controller
         $validate = $request->validate([
             'title' => 'required',
             'status' => 'required',
+            'parent_id' => 'required',
         ]);
 
         $category->title = $validate['title'];
         $category->status = $validate['status'];
+        $category->parent_id = $validate['parent_id'];
         $category->save();
         return redirect()->route('admin.page-category.index')->with('success','Category updated');
     }
@@ -92,7 +98,7 @@ class PageCategoryController extends Controller
      */
     public function destroy(PageCategories $category)
     {
-        $category->status = 0;
-        $category->save();
+        $category->delete();
+        return redirect()->route('admin.page-category.index')->with('success','Category deleted');
     }
 }
