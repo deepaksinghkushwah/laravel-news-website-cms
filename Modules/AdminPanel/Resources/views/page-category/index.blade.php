@@ -24,14 +24,16 @@
             </tr>
 
             @foreach ($categories as $row)
-            <tr class="{{ $row->deleted_at != '' ? 'bg-warning' : '' }}">
+            <tr class="{{ $row->trashed() ? 'bg-warning' : '' }}">
                 <th scope="row">{{ $row->id }}</th>
                 <th>{{ $row->title }}</th>
                 <th>{{ $row->parent_id == 0 ? 'Root' : $row->parent->title }}</th>
                 <th>{{ $row->status == 1 ? 'Active' : 'Inactive' }}</th>
                 <th>
+                    @if(!$row->trashed())
                     <a href="{{ route('admin.page-category.edit',$row->id) }}" class="btn btn-sm btn-primary">Edit</a>
                     <a href="{{ route('admin.page-category.delete',$row->id) }}" class="btn btn-sm btn-danger">Delete</a>
+                    @endif
                 </th>
             </tr>
             @endforeach
