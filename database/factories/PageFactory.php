@@ -18,7 +18,7 @@ class PageFactory extends Factory
     public function definition(): array
     {
         return [
-            'cat_id' => rand(8,11),//PageCategories::all()->random()->id
+            'cat_id' => PageCategories::all()->random()->id,//
             'title' => fake()->sentence(),
             'content' => fake()->text(1000),
             'description' => fake()->sentence(),
