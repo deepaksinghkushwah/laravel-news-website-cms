@@ -47,6 +47,6 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
             'parent_id' => 0
         ]);*/
-        Page::factory(10)->create();
+        Page::factory(100)->create();
     }
 }

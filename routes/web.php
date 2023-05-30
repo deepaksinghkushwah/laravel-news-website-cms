@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CategoryController::class,'index'])->name("root");
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/categories', [CategoryController::class,'index'])->name('category.index');
+Route::get('/categories/{category?}', [CategoryController::class,'index'])->name('category.index');
+Route::get('/pages/{page}',[PageController::class,'index'])->name('page.index');
