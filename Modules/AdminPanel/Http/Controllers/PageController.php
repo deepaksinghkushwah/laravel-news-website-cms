@@ -95,17 +95,22 @@ class PageController extends Controller
             'content' => 'required',
             'keywords' => 'required',
             'cat_id' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            /*'image' => 'required|image|mimes:jpeg,png,jpg,gif',*/
         ]);
 
-        $imageName = uniqid().time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
+        if($request->hasFile("image")){
+            $imageName = uniqid().time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $page->image = $imageName;
+        }
+
+
 
         $page->title = $validate['title'];
         $page->description = $validate['description'];
         $page->content = $validate['content'];
         $page->keywords = $validate['keywords'];
-        $page->image = $imageName;
+
         $page->cat_id = $validate['cat_id'];
         $page->save();
         return redirect('/adminpanel/pages')->with('success','Page updated');

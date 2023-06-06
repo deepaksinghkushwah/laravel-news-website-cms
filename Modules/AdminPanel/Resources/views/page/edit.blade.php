@@ -10,6 +10,7 @@
         <form action="{{ url('/adminpanel/pages', $page->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method("patch")
+            @include("adminpanel::layouts.form-errors")
             <table class="table">
             <tr>
                     <td>Category</td>
