@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Comment;
 use App\Models\Page;
 use App\Models\PageCategories;
 use Illuminate\Database\Seeder;
@@ -47,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
             'parent_id' => 0
         ]);*/
-        Page::factory(100)->create();
+        //Page::factory(100)->create();
+        Comment::factory(100)->create();
     }
 }

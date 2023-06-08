@@ -73,6 +73,9 @@
                 </div>
             </div>
         </div>
+        @include('page.comment-list',['comments' => $page->comments])
+        @include('page.comment-form',['pageID' => $page->id])
     </article>
+
 </div>
 @endsection

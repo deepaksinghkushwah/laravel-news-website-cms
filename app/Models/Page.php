@@ -14,4 +14,8 @@ class Page extends Model
     public function category(){
         return $this->belongsTo(PageCategories::class,'cat_id');
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class, "page_id");
+    }
 }
