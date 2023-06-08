@@ -21,6 +21,6 @@ Auth::routes();
 
 Route::get('/categories', [CategoryController::class,'index'])->name('category.index');
 Route::get('/categories/{category?}', [CategoryController::class,'index'])->name('category.index');
-Route::post('/page/comment/store',[PageController::class,'storeComment'])->name('page.store.comment');
+Route::post('/page/comment/store',[PageController::class,'storeComment'])->middleware('auth')->name('page.store.comment');
 Route::get('/pages/{page}',[PageController::class,'index'])->name('page.index');
 

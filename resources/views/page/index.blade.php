@@ -74,7 +74,10 @@
             </div>
         </div>
         @include('page.comment-list',['comments' => $page->comments])
+        @auth
         @include('page.comment-form',['pageID' => $page->id])
+        @endauth
+
     </article>
 
 </div>
