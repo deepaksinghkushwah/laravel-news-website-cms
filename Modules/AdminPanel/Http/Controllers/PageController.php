@@ -4,6 +4,7 @@ namespace Modules\AdminPanel\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\PageCategories;
+use App\Models\Tag;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -18,6 +19,7 @@ class PageController extends Controller
     public function index()
     {
         $pages = Page::all();
+
         return view('adminpanel::page.index',['pages' => $pages]);
     }
 
@@ -28,7 +30,8 @@ class PageController extends Controller
     public function create()
     {
         $categories = PageCategories::all();
-        return view('adminpanel::page.create',['categories' => $categories]);
+        $tags = Tag::all();
+        return view('adminpanel::page.create',['categories' => $categories,'tags' => $tags]);
     }
 
     /**
@@ -45,7 +48,10 @@ class PageController extends Controller
             'keywords' => 'required',
             'cat_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+
         ]);
+
+
 
         $imageName = uniqid().time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
@@ -57,6 +63,13 @@ class PageController extends Controller
         $page->image = $imageName;
         $page->cat_id = $validate['cat_id'];
         $page->save();
+
+        if($request->input('tags')){
+            $tags = $request->input('tags');
+            $page->tags()->attach($tags);
+        }
+
+
         return redirect('/adminpanel/pages')->with('success','Page created');
     }
 
@@ -77,8 +90,17 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
+        //dd($page->tags);
         $categories = PageCategories::all();
-        return view('adminpanel::page.edit',['page' => $page,'categories' => $categories]);
+        $allTags = Tag::all();
+        $pageTags = [];
+        if($page->tags){
+            foreach($page->tags as $tag){
+                $pageTags[] = $tag->id;
+            }
+        }
+
+        return view('adminpanel::page.edit',['page' => $page,'categories' => $categories,'pageTags' => $pageTags,'allTags' => $allTags]);
     }
 
     /**
@@ -113,6 +135,12 @@ class PageController extends Controller
 
         $page->cat_id = $validate['cat_id'];
         $page->save();
+
+        if($request->input('tags')){
+            $tags = $request->input('tags');
+            $page->tags()->sync($tags);
+        }
+
         return redirect('/adminpanel/pages')->with('success','Page updated');
     }
 

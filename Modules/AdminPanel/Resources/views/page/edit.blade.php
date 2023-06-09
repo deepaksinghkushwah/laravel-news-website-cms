@@ -23,6 +23,19 @@
                     </th>
                 </tr>
                 <tr>
+                    <td>Tags</td>
+                    <td>
+                        <div class="row">
+                            @foreach ($allTags as $item)
+                            <div class="col-sm-2">
+                                <input type="checkbox" name="tags[]" id="tags" value="{{ $item->id }}" {{ in_array($item->id, $pageTags) ? 'checked="checked"' : '' }}> {{ $item->title }}
+                            </div>
+
+                            @endforeach
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <th>Title</th>
                     <th><input class="form-control" type="text" name="title" value="{{ $page->title }}"></th>
                 </tr>

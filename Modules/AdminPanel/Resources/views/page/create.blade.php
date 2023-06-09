@@ -21,6 +21,19 @@
                     </th>
                 </tr>
                 <tr>
+                    <td>Tags</td>
+                    <td>
+                        <div class="row">
+                            @foreach ($tags as $item)
+                            <div class="col-sm-2">
+                                <input type="checkbox" name="tags[]" id="tags" value="{{ $item->id }}"> {{ $item->title }}
+                            </div>
+
+                            @endforeach
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <th>Title</th>
                     <th><input class="form-control" type="text" name="title" value=""></th>
                 </tr>

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('page_tag_relations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("page_id")->references("id")->on("pages")->cascadeOnDelete();
+            $table->foreignId("tag_id")->references("id")->on("tags")->cascadeOnDelete();
             $table->timestamps();
         });
     }

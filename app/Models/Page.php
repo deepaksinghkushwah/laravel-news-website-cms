@@ -18,4 +18,7 @@ class Page extends Model
     public function comments(){
         return $this->hasMany(Comment::class, "page_id");
     }
+    public function tags(){
+        return $this->belongsToMany(Tag::class, "page_tag_relations","page_id","tag_id");
+    }
 }
