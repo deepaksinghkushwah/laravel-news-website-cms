@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+use Modules\AdminPanel\Http\Controllers\AdminPanelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [CategoryController::class,'index'])->name("root");
+Route::get('/home', [CategoryController::class,'index'])->name("home");
 
 Auth::routes();
 
@@ -23,4 +25,6 @@ Route::get('/categories', [CategoryController::class,'index'])->name('category.i
 Route::get('/categories/{category?}', [CategoryController::class,'index'])->name('category.index');
 Route::post('/page/comment/store',[PageController::class,'storeComment'])->middleware('auth')->name('page.store.comment');
 Route::get('/pages/{page}',[PageController::class,'index'])->name('page.index');
+
+
 

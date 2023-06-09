@@ -8,12 +8,13 @@
 -->
 
 <html lang="en">
+
 <head>
 
   <!-- Basic Page Needs
   ================================================== -->
   <meta charset="utf-8">
-  <title>@yield("title")</title>
+  <title>@yield('title')</title>
 
   <!-- Mobile Specific Metas
   ================================================== -->
@@ -44,209 +45,231 @@
 <body class="body-wrapper">
 
 
-<!--========================================
+  <!--========================================
 =            Navigation Section            =
 =========================================-->
-<nav class="navbar main-nav border-less fixed-top navbar-expand-lg p-0">
-  <div class="container-fluid p-0">
-    <!-- logo -->
-    <a class="navbar-brand" href="index.html">
-      <img src="{{ asset('/frontend-theme/images/logo.png') }}" alt="logo">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="fa fa-bars"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-      <li class="nav-item">
-          <a class="nav-link" href="{{ route('category.index') }}">News<span>/</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="speakers.html">Speakers
-            <span>/</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="schedule.html">Schedule<span>/</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sponsors.html">Sponsors<span>/</span></a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="contact.html">Contact</a>
-        </li>
-      </ul>
-      <a href="contact.html" class="ticket">
-        <img src="{{ asset('/frontend-theme/images/icon/ticket.png') }}" alt="ticket">
-        <span>Buy Ticket</span>
+  <nav class="navbar main-nav border-less fixed-top navbar-expand-lg p-0">
+    <div class="container-fluid p-0">
+      <!-- logo -->
+      <a class="navbar-brand" href="index.html">
+        <img src="{{ asset('/frontend-theme/images/logo.png') }}" alt="logo">
       </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('category.index') }}">News<span>/</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="speakers.html">Speakers
+              <span>/</span>
+            </a>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact<span>/</span></a>
+
+          </li>
+          @auth
+          @can('isAdmin')
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/adminpanel') }}">Admin Panel<span>/</span></a>
+          </li>
+          @endcan
+            <li class="nav-item">
+                <form method="post" action="{{ route('logout') }}" id="logoutForm" name="logoutForm">
+                    @csrf
+                    <a class="nav-link" href="javascript:void();" onclick="$('#logoutForm').submit()">Logout</a>
+                </form>
+
+            </li>
+          @else
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('login') }}">Sign In<span>/</span></a>
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+            </li>
+          @endauth
+
+        </ul>
+        <a href="contact.html" class="ticket">
+          <img src="{{ asset('/frontend-theme/images/icon/ticket.png') }}" alt="ticket">
+          <span>Buy Ticket</span>
+        </a>
+
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!--====  End of Navigation Section  ====-->
+  <!--====  End of Navigation Section  ====-->
 
 
-<!--================================
+  <!--================================
 =            Page Title            =
 =================================-->
 
-<section class="page-title bg-title overlay-dark">
-	<div class="container">
-		<div class="row">
-			<div class="col-12 text-center">
-				<div class="title">
-					<h3>@yield("title")</h3>
-				</div>
-				<!--<ol class="breadcrumb justify-content-center p-0 m-0">
-				  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-				  <li class="breadcrumb-item active">Our News</li>
-				</ol>-->
-			</div>
-		</div>
-	</div>
-</section>
+  <section class="page-title bg-title overlay-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="title">
+            <h3>@yield('title')</h3>
+          </div>
+          <!--<ol class="breadcrumb justify-content-center p-0 m-0">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item active">Our News</li>
+    </ol>-->
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!--====  End of Page Title  ====-->
+  <!--====  End of Page Title  ====-->
 
 
-<!--================================
+  <!--================================
 =            News Posts            =
 =================================-->
 
-<section class="news section">
-	<div class="container">
-		<div class="row mt-30">
-			<div class="col-lg-4 col-md-10 mx-auto">
-				<div class="sidebar">
-					<!-- Search Widget -->
-					<div class="widget search p-0">
-						<div class="input-group">
-						    <input type="text" class="form-control main m-0" id="expire" placeholder="Search...">
-						    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-					    </div>
-					</div>
-					<!-- Category Widget -->
-					<x-category-widget/>
-					<!-- Latest post -->
-					<x-latest-news/>
-					<!-- Popular Tag Widget -->
-					<div class="widget tags">
-						<!-- Widget Header -->
-						<h5 class="widget-header">Popular Tags</h5>
-						<ul class="list-inline">
-							<li class="list-inline-item"><a href="#">Culture</a></li>
-							<li class="list-inline-item"><a href="#">Social</a></li>
-							<li class="list-inline-item"><a href="#">News</a></li>
-							<li class="list-inline-item"><a href="#">Events</a></li>
-							<li class="list-inline-item"><a href="#">Sports</a></li>
-							<li class="list-inline-item"><a href="#">Music</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-8 col-md-10 mx-auto">
-				<div class="block">
-					@yield("content")
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+  <section class="news section">
+    <div class="container">
+      <div class="row mt-30">
+        <div class="col-lg-4 col-md-10 mx-auto">
+          <div class="sidebar">
+            <!-- Search Widget -->
+            <div class="widget search p-0">
+              <div class="input-group">
+                <input type="text" class="form-control main m-0" id="expire" placeholder="Search...">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              </div>
+            </div>
+            <!-- Category Widget -->
+            <x-category-widget />
+            <!-- Latest post -->
+            <x-latest-news />
+            <!-- Popular Tag Widget -->
+            <div class="widget tags">
+              <!-- Widget Header -->
+              <h5 class="widget-header">Popular Tags</h5>
+              <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Culture</a></li>
+                <li class="list-inline-item"><a href="#">Social</a></li>
+                <li class="list-inline-item"><a href="#">News</a></li>
+                <li class="list-inline-item"><a href="#">Events</a></li>
+                <li class="list-inline-item"><a href="#">Sports</a></li>
+                <li class="list-inline-item"><a href="#">Music</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="block">
+            @yield('content')
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!--====  End of News Posts  ====-->
+  <!--====  End of News Posts  ====-->
 
-<!--==============================================
+  <!--==============================================
 =            Call to Action Subscribe            =
 ===============================================-->
 
-<section class="cta-subscribe bg-subscribe overlay-dark">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 mr-auto">
-				<!-- Subscribe Content -->
-				<div class="content">
-					<h3>Subscribe to Our <span class="alternate">Newsletter</span></h3>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusm tempor</p>
-				</div>
-			</div>
-			<div class="col-md-6 ml-auto align-self-center">
-				<!-- Subscription form -->
-				<form action="#" class="row">
-					<div class="col-lg-8 col-md-12">
-						<input type="email" class="form-control main white mb-lg-0" placeholder="Email">
-					</div>
-					<div class="col-lg-4 col-md-12">
-						<div class="subscribe-button">
-							<button class="btn btn-main-md">Subscribe</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</section>
+  <section class="cta-subscribe bg-subscribe overlay-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mr-auto">
+          <!-- Subscribe Content -->
+          <div class="content">
+            <h3>Subscribe to Our <span class="alternate">Newsletter</span></h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusm tempor</p>
+          </div>
+        </div>
+        <div class="col-md-6 ml-auto align-self-center">
+          <!-- Subscription form -->
+          <form action="#" class="row">
+            <div class="col-lg-8 col-md-12">
+              <input type="email" class="form-control main white mb-lg-0" placeholder="Email">
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="subscribe-button">
+                <button class="btn btn-main-md">Subscribe</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!--====  End of Call to Action Subscribe  ====-->
+  <!--====  End of Call to Action Subscribe  ====-->
 
-<!--================================
+  <!--================================
 =            Google Map            =
 =================================-->
 
-<!--====  End of Google Map  ====-->
+  <!--====  End of Google Map  ====-->
 
-<!--============================
+  <!--============================
 =            Footer            =
 =============================-->
 
-<footer class="footer-main">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="block text-center">
-          <div class="footer-logo">
-            <img src="{{ asset('/frontend-theme/images/footer-logo.png') }}" alt="logo" class="img-fluid">
+  <footer class="footer-main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block text-center">
+            <div class="footer-logo">
+              <img src="{{ asset('/frontend-theme/images/footer-logo.png') }}" alt="logo" class="img-fluid">
+            </div>
+            <ul class="social-links-footer list-inline">
+              <li class="list-inline-item">
+                <a href="https://themefisher.com/"><i class="fa fa-facebook"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://themefisher.com/"><i class="fa fa-twitter"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://themefisher.com/"><i class="fa fa-instagram"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://themefisher.com/"><i class="fa fa-rss"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://themefisher.com/"><i class="fa fa-vimeo"></i></a>
+              </li>
+            </ul>
           </div>
-          <ul class="social-links-footer list-inline">
-            <li class="list-inline-item">
-              <a href="https://themefisher.com/"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://themefisher.com/"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://themefisher.com/"><i class="fa fa-instagram"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://themefisher.com/"><i class="fa fa-rss"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://themefisher.com/"><i class="fa fa-vimeo"></i></a>
-            </li>
-          </ul>
-        </div>
 
-      </div>
-    </div>
-  </div>
-</footer>
-<!-- Subfooter -->
-<footer class="subfooter">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 align-self-center">
-        <div class="copyright-text">
-          <p><a href="index.html">Eventre</a> &copy; 2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a></p>
         </div>
       </div>
-      <div class="col-md-6">
-        <a href="#" class="to-top"><i class="fa fa-angle-up"></i></a>
+    </div>
+  </footer>
+  <!-- Subfooter -->
+  <footer class="subfooter">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 align-self-center">
+          <div class="copyright-text">
+            <p><a href="index.html">Eventre</a> &copy; 2021, Designed &amp; Developed by <a
+                href="https://themefisher.com/">Themefisher</a></p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <a href="#" class="to-top"><i class="fa fa-angle-up"></i></a>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
 
   <!-- JAVASCRIPTS -->

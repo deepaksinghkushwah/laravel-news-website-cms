@@ -47,6 +47,22 @@
             </li>
           </ul>
         </li>
+
+        <li>
+            <a class="sidebar-sub-toggle">
+              <i class="ti-target"></i> Tags
+              <span class="sidebar-collapse-icon ti-angle-down"></span>
+            </a>
+            <ul>
+              <li>
+                <a href="{{ route('admin.tag.create') }}">Create New</a>
+              </li>
+              <li>
+                <a href="{{ route('admin.tag.index') }}">List All</a>
+              </li>
+            </ul>
+          </li>
+
         <li>
           <a href="../documentation/index.html">
             <i class="ti-file"></i> Documentation</a>

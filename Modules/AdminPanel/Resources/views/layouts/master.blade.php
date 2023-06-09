@@ -48,6 +48,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 p-r-0 title-margin-right">
+                        <x-flash-message/>
                         @yield('content')
                         {{-- Laravel Vite - JS File --}}
                         {{-- {{ module_vite('build-adminpanel', 'Resources/assets/js/app.js') }} --}}
