@@ -42,7 +42,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        {{ $pages->links() }}
+        {{ $pages->withQueryString()->links() }}
     </div>
 </div>
 @endsection

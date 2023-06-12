@@ -4,6 +4,10 @@
       <ul>
         <li class="label">Navivation</li>
         <li>
+            <a href="{{ route("home") }}">
+              <i class="ti-file"></i> Main Site</a>
+          </li>
+        <li>
           <a class="sidebar-sub-toggle">
             <i class="ti-user"></i> Users
             <span class="sidebar-collapse-icon ti-angle-down"></span>

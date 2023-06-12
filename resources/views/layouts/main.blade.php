@@ -144,12 +144,7 @@
         <div class="col-lg-4 col-md-10 mx-auto">
           <div class="sidebar">
             <!-- Search Widget -->
-            <div class="widget search p-0">
-              <div class="input-group">
-                <input type="text" class="form-control main m-0" id="expire" placeholder="Search...">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              </div>
-            </div>
+            <x-search-widget/>
             <!-- Category Widget -->
             <x-category-widget />
             <!-- Latest post -->
@@ -157,15 +152,7 @@
             <!-- Popular Tag Widget -->
             <div class="widget tags">
               <!-- Widget Header -->
-              <h5 class="widget-header">Popular Tags</h5>
-              <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Culture</a></li>
-                <li class="list-inline-item"><a href="#">Social</a></li>
-                <li class="list-inline-item"><a href="#">News</a></li>
-                <li class="list-inline-item"><a href="#">Events</a></li>
-                <li class="list-inline-item"><a href="#">Sports</a></li>
-                <li class="list-inline-item"><a href="#">Music</a></li>
-              </ul>
+              <x-popular-tags-widget/>
             </div>
           </div>
         </div>
