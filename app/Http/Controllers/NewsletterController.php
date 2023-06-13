@@ -13,9 +13,9 @@ class NewsletterController extends Controller
             'email' => 'required|email',
         ]);
 
-        $exists = Newsletter::where("email", $validate['email'])->get();
-        //dd($exists);
-        if (count($exists)>0) {
+        $exists = Newsletter::where("email", $validate['email'])->count();
+
+        if ($exists > 0) {
             return redirect()->route("category.index")->with("danger", "Already subscribed to newsletter");
         } else {
             Newsletter::create([
