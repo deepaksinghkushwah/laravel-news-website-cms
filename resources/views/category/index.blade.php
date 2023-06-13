@@ -23,13 +23,10 @@
                             <i class="fa fa-user-o"></i>
                             <a href="#">Admin</a>
                         </li>
-                        <li class="list-inline-item">
-                            <i class="fa fa-heart-o"></i>
-                            <a href="#">350</a>
-                        </li>
+
                         <li class="list-inline-item">
                             <i class="fa fa-comments-o"></i>
-                            <a href="#">30</a>
+                            <a href="#">{{ count($row->comments) }}</a>
                         </li>
                     </ul>
                 </div>

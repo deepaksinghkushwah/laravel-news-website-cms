@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 use Modules\AdminPanel\Http\Controllers\AdminPanelController;
@@ -26,5 +27,7 @@ Route::get('/categories', [CategoryController::class,'index'])->name('category.i
 Route::post('/page/comment/store',[PageController::class,'storeComment'])->middleware('auth')->name('page.store.comment');
 Route::get('/pages/{page}',[PageController::class,'index'])->name('page.index');
 
+// newsletter
+Route::post('/newsletter',[NewsletterController::class,'save'])->name("newsletter.save");
 
 
